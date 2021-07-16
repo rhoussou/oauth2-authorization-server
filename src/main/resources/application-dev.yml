@@ -1,0 +1,46 @@
+#databases server hosts urls
+database:
+  server:
+    url: jdbc:postgresql://localhost:5432/accounts
+
+
+#getaway server hosts urls
+getaway:
+  server:
+    url: http://localhost:8765
+
+
+feign:
+  name: user-api
+  url: localhost:8087/user-api
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.server.url}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    preferIpAddress: true
+
+  #eureka server hosts urls
+  server:
+    url: http://localhost:8761/eureka
+    #heroku: https://ereuka-registry-server.herokuapp.com/eureka
+
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+  datasource:
+    platform: ${SPRING_JPA_DATABASE-PLATFORM:postgres}
+    url: ${SPRING_DATASOURCE_URL:${database.server.url}}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    driverClassName: org.postgresql.Driver
+    #initialization-mode: always #rempli la bd avec les requetes sql dans data.sql
+  flyway:
+    locations: classpath:db/migration/postgresql
+    clean-disabled: false

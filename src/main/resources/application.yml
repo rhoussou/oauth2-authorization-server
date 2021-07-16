@@ -1,0 +1,17 @@
+server:
+  servlet:
+    context-path: /uaa
+  port: ${PORT:5000}
+
+security:
+  jwt:
+    key-store: classpath:keystore.jks
+    key-store-password: letmein
+    key-pair-alias: mytestkey
+    key-pair-password: changeme
+
+spring:
+  application:
+    name: auth-server-api
+  profiles:
+    active: dev
